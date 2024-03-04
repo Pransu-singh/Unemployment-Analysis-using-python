@@ -1,2 +1,48 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the unemployment data (example)
+unemployment_data = pd.read_csv("unemployment_data.csv")
+
+# Display the first few rows of the dataframe
+print(unemployment_data.head())
+
+# Check for missing values
+print(unemployment_data.isnull().sum())
+
+# Summary statistics
+print(unemployment_data.describe())
+
+# Visualize unemployment rate over time
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=unemployment_data, x='Year', y='Unemployment_Rate')
+plt.title('Unemployment Rate Over Time')
+plt.xlabel('Year')
+plt.ylabel('Unemployment Rate (%)')
+plt.show()
+
+# Visualize unemployment rate by gender
+plt.figure(figsize=(10, 6))
+sns.boxplot(data=unemployment_data, x='Gender', y='Unemployment_Rate')
+plt.title('Unemployment Rate by Gender')
+plt.xlabel('Gender')
+plt.ylabel('Unemployment Rate (%)')
+plt.show()
+
+# Visualize unemployment rate by education level
+plt.figure(figsize=(10, 6))
+sns.boxplot(data=unemployment_data, x='Education_Level', y='Unemployment_Rate')
+plt.title('Unemployment Rate by Education Level')
+plt.xlabel('Education Level')
+plt.ylabel('Unemployment Rate (%)')
+plt.xticks(rotation=45)
+plt.show()
+
+# Correlation matrix
+correlation_matrix = unemployment_data.corr()
+plt.figure(figsize=(10, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+plt.title('Correlation Matrix')
+plt.show()
